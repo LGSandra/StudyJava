@@ -1,0 +1,53 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jframe;
+
+import javax.swing.*; 
+import java.awt.*;
+public class Windows extends JFrame{
+    //declaramos el grid 
+      Container content = getContentPane ();
+      JPanel grid = new JPanel (new FlowLayout ());
+      //JPanel grid = new JPanel (new GridLayout (2,2)); // contenedor del panel
+      
+      JPanel win =new JPanel();
+      // imagen de los iconos
+      ImageIcon check = new ImageIcon ("C:\\Users\\Admin\\Jframe\\src\\jframe\\check.png.png");
+      
+      JButton btn1 =new JButton("BUTTON1"); //("BUTTON1",check)tambien se puede llamar asid el icono sin la va riable ,
+      JButton btn2 =new JButton("BUTTON2", check);
+      JButton btn3 =new JButton("BUTTON3", check);
+      
+      
+       
+      //constructor windows
+        public Windows () {
+            super("My Awesome Windows!");
+            setSize(640, 480); //tamaño ventana
+            add(win); 
+            setVisible(true);
+           //setResizable(false); //anula el maximizar la ventana
+            
+            setLocationRelativeTo(null); 
+            //botones
+            win.add(btn1);
+            btn1.setIcon(check); //variable para coger el bton. 
+            win.add(btn2);
+            win.add(btn3);
+                
+            grid.add(new JButton("A")); //botones en el grid
+            grid.add(new JButton("B"));
+            grid.add(new JButton("C"));
+            grid.add(new JButton("D"));
+            
+            content.add("North",win); //posicion
+            content.add("Center",grid); // posicion centrar de la grid
+            
+        }   
+       public static void main(String[] args) {
+           Windows gui = new Windows();
+    }
+}
