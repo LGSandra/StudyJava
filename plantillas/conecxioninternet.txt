@@ -1,0 +1,25 @@
+//label para saber si tiene conecxion con un icono 
+
+
+//para que cargue que no tienes internet el jlabel3
+    Timer timer1 = new Timer(3000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            String conStatus = null;
+            try {
+                URL u = new URL("https://www.google.es/%22);
+                HttpsURLConnection huc = (HttpsURLConnection) u.openConnection();
+                huc.connect();
+                conStatus = "Online" ;
+                jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("verde.png")));
+            } catch (IOException ex) {
+                conStatus = "Desconectado";
+                jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("rojo.png")));
+            }
+
+            jLabel5.setText( conStatus );
+
+        }
+    });
+    timer1.setRepeats(false); // Only execute once
+    timer1.start(); // Go go go!
