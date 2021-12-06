@@ -1,0 +1,73 @@
+//creacion de log 
+
+
+// se guarda en la carpeta del proyecto 
+
+//
+
+//esto va dentro de la clase donde este init componetes. 
+boolean conexion = hayConexion();
+        String hayConexion = "NO";
+        if (conexion) {
+            hayConexion = "SÍ";
+        }
+         anadirLog("Abierto por " + System.getenv("USERNAME") + " en " + System.getProperty("os.name") + "\t Connectado a internet: " + hayConexion);
+    } // fin de la clase donde esta init componetes. 
+
+// apartir de este codigo va fuera del la clase donde este el inicicomponent. 
+
+
+boolean conexion = hayConexion();
+        String hayConexion = "NO";
+        if (conexion) {
+            hayConexion = "SÍ";
+        }
+         anadirLog("Abierto por " + System.getenv("USERNAME") + " en " + System.getProperty("os.name") + "\t Connectado a internet: " + hayConexion);
+    }
+ public boolean hayConexion() {
+        String dirWeb = "www.google.com";
+        int puerto = 80;
+        boolean hay = false;
+        try {
+            Socket s = new Socket(dirWeb, puerto);
+            if (s.isConnected()) {
+                System.out.println("Conexión establecida con la dirección: " + dirWeb + " a travéz del puerto: " + puerto);
+                hay = true;
+            } else {
+                hay = false;
+            }
+
+        } catch (Exception e) {
+            System.err.println("No se pudo establecer conexión con: " + dirWeb + " a travez del puerto: " + puerto);
+
+        }
+        return hay;
+    }
+    public void anadirLog(String text) {
+
+        try {
+            String ruta = "log.txt";
+            String fh = "";
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            fh += dtf.format(LocalDateTime.now()) + "\t" + System.getenv("USERNAME") + "\t";
+
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+                FileWriter fw = new FileWriter(file, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write("FECHA \t\t\t   USUARIO \t \n");
+                bw.close();
+            }
+            FileWriter fw = new FileWriter(file, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            String rutaEjec = new File(".").getAbsolutePath();
+            bw.write(fh + text + "\t" + rutaEjec + "\n");
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }

@@ -1,0 +1,31 @@
+// ping a google para saber si se tiene conecxion a internet.
+
+//import
+import java.net.URL;
+import java.io.IOException;
+import javax.net.ssl.HttpsURLConnection;
+
+
+//colorcar en el label correspondiente. 
+	//ping a google, falta bucle para comprobar la conecxion y que cambie el icono 
+    Timer timer4 = new Timer(3000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            String conStatus = null;
+            try {
+                URL u = new URL("https://www.google.es/%22");
+                HttpsURLConnection huc = (HttpsURLConnection) u.openConnection();
+                huc.connect();
+                conStatus = "Online" ;
+                jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("verde.png")));
+            } catch (IOException ex) {
+                conStatus = "Desconectado";
+                jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("rojo.png")));
+            }
+
+            jLabel3.setText( conStatus );
+
+        }
+    });
+    timer4.setRepeats(true); // Only execute once
+    timer4.start(); // Go go go! 
