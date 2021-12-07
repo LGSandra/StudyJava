@@ -1,0 +1,30 @@
+// abrir ventana de carga antes del programa
+/* importante ventana aparte del programa - 
+*  tener los siguientes elementos en el diseño. 
+*	Jlabel con un icono - Lbimg
+*	Jlabel con el mensaje de carga - Lbcarga
+*	JProgressBar - progressbar
+*/
+//initComponents
+
+ //centrar ventana
+        setLocationRelativeTo(null); //centrar pantalla carga
+////
+
+//se coloca en el main 
+ //llamado a la ventana    
+    splashscreen splash = new splashscreen();//llamos la ventana para iniciarla
+    splash.setVisible(true); //Se hace visible
+    try {
+        for (int i=0;i<=100;i++){ //iniciar el ciclo de 0 a 100
+        Thread.sleep(50); //velocidad de carga
+        splash.progressbar.setValue(i); //muestra el proceso de carga 
+        splash.Lbcarga.setText("Cargando programa espere porfavor..." +(Integer.toString(i)+"%")); //mensaje + porcentaje
+        if (i == 100){ // si el valor es igual a 100
+            splash.setVisible(false); // cierra el formulario 
+            ventana ventana1 = new ventana (); // abre ventana
+            ventana1.setVisible (true); // enseña ventana
+        }
+        } // for para la carga
+    } catch (Exception e){
+    }
