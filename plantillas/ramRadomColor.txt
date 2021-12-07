@@ -1,0 +1,67 @@
+//visualizador de memoria ram con fondo de colores diferentes
+//import 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
+// el actionlistener se coloca debajo del initComponentes();
+//jTextArea1 = nombre
+
+   ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int mb = 1024 * 1024;
+                Runtime instance = Runtime.getRuntime();
+                //Formato de 24horas
+                Date date = new Date();
+                DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                String time = timeFormat.format(date);
+                Lfecha.setText("Hora " + time);
+                Lfecha.setText(date + "\n"); //se elige usar el formato 24horas
+                Random random = new Random();
+                //para calcular la memoria total
+                jTextArea1.setText("");
+                jTextArea1.append("Memoria Total: " + instance.totalMemory() / mb + "[MB]" + "\n");
+                jTextArea1.append("Memoria Libre: " + instance.freeMemory() / mb + "[MB]" + "\n");
+                jTextArea1.append("Memoria Usada: "
+                        + (instance.totalMemory() - instance.freeMemory()) / mb + "[MB]" + "\n");
+                jTextArea1.append("Maxima Memoria: " + instance.maxMemory() / mb + "[MB]");
+                
+                int uno = (int) (instance.freeMemory() / mb);
+                for (int i = 0; i < jTextArea1.getDocument().getLength(); i++) {
+                    if (uno != (instance.freeMemory() / mb)) {
+                  jTextArea1.setBackground(new Color(random.nextInt(256), random.nextInt(256),
+                           random.nextInt(256)));
+
+                    }
+                }
+            }
+        };
+     addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent componentEvent) {
+                int mb = 1024 * 1024;
+                Runtime instance = Runtime.getRuntime();
+                //jLabel1.setText("<html><br>Memoria Usada: "+(instance.totalMemory() - instance.freeMemory()) / mb+"[MB]</br></html>");
+                jTextArea1.setText("");
+                jTextArea1.append("Memoria Total: " + instance.totalMemory() / mb + "[MB]" + "\n");
+                jTextArea1.append("Memoria Libre: " + instance.freeMemory() / mb + "[MB]" + "\n");
+                jTextArea1.append("Memoria Usada: "
+                        + (instance.totalMemory() - instance.freeMemory()) / mb + "[MB]" + "\n");
+                jTextArea1.append("Maxima Memoria: " + instance.maxMemory() / mb + "[MB]");
+                Random random = new Random();
+                for (int i = 0; i < jTextArea1.getDocument().getLength(); i++) {
+
+                    jTextArea1.setForeground(
+                            new Color(random.nextInt(256), random.nextInt(256),
+                                    random.nextInt(256)));
+                    jTextArea1.setBackground(new Color(random.nextInt(256), random.nextInt(256),
+                            random.nextInt(256)));
+                }
+           
+            }
+        });
+
+    }

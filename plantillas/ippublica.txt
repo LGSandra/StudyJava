@@ -1,0 +1,23 @@
+        // codigo para ver si tiene internet con ping y que te de tu ip publica. 
+//colocar en el componente que se quiere poner
+String publicIP = null;
+   
+    	try {
+                URL tempURL = new URL("http://checkip.amazonaws.com");
+                HttpURLConnection tempConn = (HttpURLConnection)tempURL.openConnection();
+                InputStream tempInStream = tempConn.getInputStream();
+                InputStreamReader tempIsr = new InputStreamReader(tempInStream);
+                BufferedReader tempBr = new BufferedReader(tempIsr);        
+ 
+                publicIP = tempBr.readLine();
+ 
+                tempBr.close();
+                tempInStream.close();
+ 
+        } catch (Exception ex) {
+                publicIP = "<No es posible resolver la direccion IP>";   
+          }
+ 
+         //System.out.println("Mi IP Publica es " +publicIP);
+         jLabel4.setText("Mi IP publica es " + publicIP); //cambiar el nombre jLabel4 por la label correspondiente
+    

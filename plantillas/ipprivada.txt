@@ -1,0 +1,15 @@
+// como conseguir ip privada
+ dentro de la clase principal. debajo de initcomponet. 
+ //ip host
+        String Localhost = "";
+         try {
+ 
+		InetAddress  ip = InetAddress.getLocalHost();
+		
+                jLabel4.setText(ip.getHostAddress()); //cambiar nombre de la label por el correspondiente. 
+                
+	  } catch (UnknownHostException ex) {
+ 
+	   ex.printStackTrace();
+ 
+	  }

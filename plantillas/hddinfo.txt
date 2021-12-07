@@ -1,0 +1,12 @@
+//codigo para saber el uso del disco duro hdd. 
+// se pone dentro  
+
+
+File drive = new File("C:\\");
+    long espacioTotal = drive.getTotalSpace();
+    long espacioLibre = drive.getFreeSpace(); 
+          jTextArea3.setText("");
+           jTextArea3.setText("INFORMACIÓN DEL DISCO DURO");
+     jTextArea3.append("\n Espacio Total:" +espacioTotal +" kB = " + "" +espacioTotal/1073741824 +" GB \n");
+     jTextArea3.append(" Espacio Libre: " +espacioLibre +" kB = " +espacioLibre/1073741824 +" GB");
+        
